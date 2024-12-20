@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persian Time Widget</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+        }
+        .time-widget {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-widget" id="time-widget"></div>
+
+    <script>
+        // Function to convert numbers to Persian
+        function toPersianNumbers(num) {
+            const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return num.toString().replace(/\d/g, (digit) => persianDigits[digit]);
+        }
+
+        // Function to update time
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const timeString = `${toPersianNumbers(hours)}:${toPersianNumbers(minutes)}`;
+            document.getElementById('time-widget').textContent = timeString;
+        }
+
+        // Update time every minute
+        setInterval(updateTime, 60000);
+        updateTime();
+    </script>
+</body>
+</html>
